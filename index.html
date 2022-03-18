@@ -136,6 +136,7 @@
         background-color: #eb9efa;
     }
     .timerAlert{
+        position: relative;
         background-color: #eb9efa;
         color:#fff;
         display:none;
@@ -165,7 +166,7 @@
         font-weight: bold;
     }
     .score{
-        font-size:26px;
+        font-size:40px;
         margin-top:8px;
     }
     .scoreContainer{
@@ -260,12 +261,8 @@
         right: 30px;
         cursor:pointer;
     }
-    .close:after{
-        width:24px;
-        height:24px;
-        font-size: 32px;
-        color: #fff;
-        content:'×';   
+    .timerAlert .close{
+        font-size:30px;
     }
     .back{
         position: absolute;
@@ -320,12 +317,13 @@
         </div> 
         <div class="timerAlert">
             <p style="margin-top:10px;margin-bottom:10px"></p>
-            <span class="close" onclick="gotoHomePage()"></span>
+            <span class="close" onclick="gotoHomePage()"><i class="fa-solid fa-xmark"></i></span>
             <p class="correctWord"></p>
             <div class="btn" onclick="gotoLevel(wordlee.currentLevel)"> மீண்டும் முயற்சிக்க
             </div>   
          </div> 
            <div class="popup levelcompletedPopup">
+               <span class="close" onclick="gotoHomePage()"><i class="fa-solid fa-xmark"></i></span>
                <p class="popupmsg">வாழ்த்துக்கள்!! </p>
                 <div class="btn mT30" onclick="gotoNextLevel()">அடுத்த நிலைக்கு செல்ல</div>
            </div>    
