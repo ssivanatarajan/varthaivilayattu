@@ -1,0 +1,334 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./words.js"></script>
+    <script src="./script.js"></script>
+    <script src="https://kit.fontawesome.com/48adbedcff.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+        }
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container,.welcomescreen{
+        width:600px;
+        height:100vh;
+        display: flex;
+        align-items: center;
+        flex-direction:column;
+    }
+    .container{
+        display: none;
+        justify-content: center;
+        background-color: #D798C0;
+        position: relative;
+    }
+    .circle{
+        width:70px;
+        height:70px;
+        border-radius:50%;
+        color:#fff;
+        font-size:26px;
+        font-weight: bold;
+        position:absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor:pointer;
+    }
+    .outputCircle{
+        width:50px;
+        height:50px;
+        border:1px solid #fcfcfc;   
+        border-radius:50%;
+        color:#fff;
+        font-size:20px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin:5px;
+    }
+    .circle[data-isselected=true]{
+         background-color: #f3f3f3 !important;
+         border:1px solid #fcfcfc;   
+         color:#333;
+    }
+    .outputcontainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:150px;
+    }
+    #input{
+        width: 500px;
+        /* height:500px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:30px; 
+        margin-bottom:30px; 
+        flex-grow: 1;
+    }
+    .spinner{
+        border: 1px solid #f3f3f3;
+        animation: spinner 2s linear infinite;
+        width:100%;
+        height:100%;
+    }
+    @keyframes spinner {
+        0%{
+            border-top:1px solid red;
+            transform :rotate(0deg);
+        }
+        100%{
+            transform:rotate(360deg);
+        }
+    }
+    .scoreLevel{
+        width:500px;
+        height:20px;
+        border-radius: 8px;
+        border:1px solid #f1f1f1;
+        visibility: hidden;
+    }
+    .bar{
+        height:20px;
+        border-radius: 8px;
+        background-color: #7bf1a8;
+        width:0px;
+    }
+    .appname{
+        font-size:36px;
+        color:#7bf1a8;
+        margin-top: 40px;
+        text-shadow: -5px -1px 5px #8d4949;
+    }
+    .levelcontainer{
+        margin-top:20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .level{
+        border:1px solid #fff;
+        border-radius: 6px;
+        padding:10px;
+        margin-top: 20px;
+        width:400px;
+        cursor:pointer;
+        color:#fff;
+        display: flex;
+    }
+    .level:hover
+    {
+        box-shadow: -3px 2px 1px 0px #a6858f; 
+    }
+
+    .fg1{
+        flex-grow: 1;
+    }
+    .welcomescreen{
+        background-color: #eb9efa;
+    }
+    .timerAlert{
+        background-color: #eb9efa;
+        color:#fff;
+        display:none;
+        justify-content: center;
+        width: 600px;
+        height: 100vh;
+        align-items: center;
+        flex-direction: column;
+    }
+    .correctWord{
+        font-size:20px;
+        font-weight: bold;
+        flex-grow:1;
+    }
+    .btn{
+        font-size:16px;
+        font-size: 16px;
+        margin-bottom: 100px;
+        padding: 10px 30px;
+        border: 1px solid #fff;
+        border-radius: 6px;
+    }
+    .timer{
+        margin-top:10px;
+        color:#fff;
+        font-size: 26px;
+        font-weight: bold;
+    }
+    .score{
+        font-size:26px;
+        margin-top:8px;
+    }
+    .scoreContainer{
+        font-weight: bold;
+        margin-top: 10px;
+        color:#fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position:relative;
+        padding-bottom:20px;
+    }
+    .addedScore{
+        font-size:25px;
+        font-weight: bold;
+        position:absolute;
+        top:100%;
+        width:0px;
+        height:0px;
+        overflow: hidden;
+    }
+    .addedScore.show{
+        animation:addscore 600ms ease-in-out;
+    }
+    @keyframes addscore {
+        0%{
+            display:block;
+            transform:scale(2.5);
+            width:auto;
+            height:auto;
+        }
+        80%{
+            transform:scale(0);
+        }
+        100%{
+            width:0px;
+            height:0px;
+            top:15px;
+        }
+    }
+    .mT30{
+        margin-top:30px;
+    }
+    .popup{
+        position: absolute;
+        top:-100%;
+        left:50%;
+        z-index: 3;
+        border:1px solid #f3f3f3;
+        width: 300px;
+        height:300px;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        transition: top ease-in 300ms;
+        transform: translate(-50%, -50%);
+        flex-direction: column;
+        border-radius: 6px;
+        padding: 30px;
+        box-sizing: border-box;
+        box-shadow:4px 4px 4px #817979;
+    }
+    .popup.show{
+        top:50%;
+    }
+    .freezeLayer{
+        position:fixed;
+        width: 600px;
+        height: 100%;
+        z-index:2;
+        background-color: #ebf2f099;
+        display: none;
+    }
+    .popupmsg
+    {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+        color: #21934c;
+        text-shadow: -1px -1px 2px #7bf1a8;
+    }
+    .popup .btn{
+        margin-top: 20px;
+        background-color: #7bf1a8;
+        color: #fff;
+        border:1px solid #fff;
+    }
+    .close{
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        cursor:pointer;
+    }
+    .close:after{
+        width:24px;
+        height:24px;
+        font-size: 32px;
+        color: #fff;
+        content:'×';   
+    }
+    .back{
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        font-size: 2em;
+        color: #fff;
+    }
+</style>
+    <body>
+        
+        <div class="container">
+            <!-- <div class="scoreLevel">
+                <div class="bar"></div>
+            </div> -->
+            <span  class="back" onclick="gotoHomePage()"><i class="fa-solid fa-chevron-left"></i></span>
+            <div class="scoreContainer">
+                <p>புள்ளிகள்</p>
+                <p class="score"></p>
+                <span class="addedScore">+1</span>
+            </div>
+            <div id="output" class="outputcontainer">
+                
+            </div>
+            <div class="timer"></div>
+            <div id="input">
+                <!-- <div class="spinner"></div> -->
+            </div>
+        </div>
+        <div class="welcomescreen">
+            <p class="appname">வார்த்தை விளையாட்டு</p>
+            <div class="levelcontainer">
+                <div class="level" onclick="gotoLevel('3');" data-level="3">
+                   <span class="fg1"> 3 வார்த்தைகள்</span>
+                </div>
+                <div class="level" onclick="gotoLevel('4');" data-level="4">
+                    <span class="fg1">  4 வார்த்தைகள்</span>
+                </div>
+                <div class="level" onclick="gotoLevel('5');" data-level="5">
+                    <span class="fg1"> 5 வார்த்தைகள்</span>
+                </div>
+                <div class="level" onclick="gotoLevel('6');" data-level="6">
+                    <span class="fg1"> 6 வார்த்தைகள்</span>
+                </div>
+                <div class="level" onclick="gotoLevel('7');" data-level="7">
+                    <span class="fg1"> 7 வார்த்தைகள்</span>
+                </div>
+                <div class="level" onclick="gotoLevel('8');" data-level="8">
+                    <span class="fg1"> 8 வார்த்தைகள்</span>
+                </div>
+             </div>   
+        </div> 
+        <div class="timerAlert">
+            <p style="margin-top:10px;margin-bottom:10px"></p>
+            <span class="close" onclick="gotoHomePage()"></span>
+            <p class="correctWord"></p>
+            <div class="btn" onclick="gotoLevel(wordlee.currentLevel)"> மீண்டும் முயற்சிக்க
+            </div>   
+         </div> 
+           <div class="popup levelcompletedPopup">
+               <p class="popupmsg">வாழ்த்துக்கள்!! </p>
+                <div class="btn mT30" onclick="gotoNextLevel()">அடுத்த நிலைக்கு செல்ல</div>
+           </div>    
+           <div class="freezeLayer"></div>
+    </body>   
+</html>
