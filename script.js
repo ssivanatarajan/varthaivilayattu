@@ -6,14 +6,6 @@ var circlebgs=[
     '#5465ff','#788bff','#fe938c','#f20089','#e500a4','#db00b6','#d100d1','#8900f2','#1a535c','#1be7ff','#6eeb83','#ffb800','#ff5714','#ef8354',
     '#2d3142','#1a535c'
 ]
-// var words={
-//     // "threeletterwords":[
-//     //     "ant","add","sub","zoo","and","foo","bar","rat","cat","tab","bat","tub"
-//     // ],
-//     "threeletterwords":[
-//         "பணம்", "பானம்", "பிணம்", "பையன்", "பத்து" 
-//     ]
-// }
 var diacritics = {
     "\u0B82": true,
     "\u0BBE": true,
@@ -67,10 +59,9 @@ $(document).ready(function(){
         if(selectedWord.length == wordlee.randomWord.length){
             if( wordlee.wordsCombinations.includes(selectedWord.join(''))){
                 $('.scoreLevel').css('visibility','visible');
-                console.log('win');
                 score++;
                 $('.addedScore').addClass('show');
-                if(score == 1){
+                if(score == 10){
                     var clearedLevelsStr=localStorage.getItem('wordlee_clearedlevels');
                     if(clearedLevelsStr!=null){
                         var clearedLevels = JSON.parse(clearedLevelsStr);
